@@ -46,4 +46,47 @@ Interrupt Controllers usually include three main registers: the Interrupt Reques
 
 When connected to microprocessors like the 8085 (with 5 interrupts) or 8086 (with 2 interrupts), the 8259 significantly expands their interrupt-handling capability. A single 8259 provides 8 interrupt inputs (IR0–IR7) and consolidates them into a single interrupt output to the CPU. For example, interfacing it with the 8085 increases its interrupt levels from 5 to 8.
 
+#  Key Features of the Intel 8259 PIC include:
+  1.Designed specifically for compatibility with Intel 8085 and Intel 8086
+ microprocessors. <br>
  
+ 2.Programmable for either level-triggered or edge-triggered interrupt levels. <br>
+ 
+ 3.Allows for the masking of individual bits in the interrupt request register. <br>
+ 
+ 4.Capable of extending interrupt handling capability to 64 levels by <br>
+ cascading additional 8259 PICs. <br>
+ 
+ 5.Operates without the need for a clock cycle <br>
+ 
+ #  Functional description :
+ The 8259A plays a key role in handling system interrupts. With 8 interrupt input lines, it receives requests from external devices, determines their priority, and sends an interrupt signal to the CPU. It can be expanded to handle up to 64 interrupt levels using cascading. Once an interrupt is accepted, the 8259 provides the CPU with the address of the corresponding Interrupt Service Routine (ISR), allowing the CPU to jump directly to the handler. Being programmable, it offers various modes of operation, letting programmers tailor the interrupt handling process to specific system needs.
+
+#  Common functions/features of all PICs:
+Typical PICs offer functions such as interrupt handling, prioritization, masking, vectoring, arbitration, acknowledgment, routing, cascading, fault tolerance, and power management. However, this project will focus on a few key features, using the 8259A as the primary theoretical example—especially relevant for systems using 8085 and 8086 microprocessors. The Verilog code developed for this project demonstrates a generic 8-bit interrupt controller, showcasing two fundamental features.
+
+#  FUNCTIONS DONE IN OUR PROJECT :
+ As we discussed earlier the code for our project is for a simple 8-bit
+ interrupt controller.Here there are two major functions performed in our
+ project. The two modes are polling and custom priority.
+
+# Polling:
+In polling mode, the processor sends xxxx_xx01 on the bus for one cycle, prompting the controller to check all interrupt sources. If an interrupt is active, intr_out is set to 1. On receiving a High–Low–High transition on intr_in, the controller sends 01011_intrID on the bus. After another similar acknowledgment, the processor signals completion with 10100_intrID. If the interrupt ID matches, the controller moves to the next source; otherwise, it resets.
+
+# Custom Priority:
+Custom priority mode works like polling but follows a user-defined priority instead of fixed order. After reset, sending xxxyyy10 sets the highest (xxx) and second-highest (yyy) priority. This input is repeated four times to set all eight priorities. The controller then checks for active interrupts in that order. Unlike polling, it uses 10011 to send interrupt info and expects 01100 as acknowledgment from the processor.
+
+# MAJOR COMPONENTS OF OUR PROJECT:
+**1. Data bus buffer:** <br>
+Acts as a bridge between the 8259 and 8085/8086 microprocessors. It transfers control words from the CPU to the 8259 and sends the selected interrupt’s opcode and ISR address back to the CPU. It’s an 8-bit buffer (D0–D7), handling 8 bits of data at a time.
+
+**2. Interrupt Request Register (IRR):** <br>
+Stores all active interrupt requests that are waiting to be serviced.
+
+**3. Interrupt Service Register (ISR):** <br>
+Holds interrupts currently being serviced by the CPU.
+
+**4. Priority Resolver:** <br>
+Analyzes the IRR, ISR, and mask register to identify the highest priority interrupt, then updates the ISR accordingly.
+
+# 
