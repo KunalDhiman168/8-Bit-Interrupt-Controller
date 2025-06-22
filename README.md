@@ -16,8 +16,8 @@ Interrupt Controllers usually include three main registers: the Interrupt Reques
  ● Motivation <br>
  ● Novelty <br>
  ● Verilog HDL Code <br>
- ○ Design Code <br>
- ○ Testbench Code <br>
+   ○ Design Code <br>
+   ○ Testbench Code <br>
  ● Result <br>
  ● Conclusion <br>
  ● Future Work <br>
@@ -89,4 +89,51 @@ Holds interrupts currently being serviced by the CPU.
 **4. Priority Resolver:** <br>
 Analyzes the IRR, ISR, and mask register to identify the highest priority interrupt, then updates the ISR accordingly.
 
-# 
+# MOTIVATION
+**What made us choose this project?** <br>
+We chose this project to ensure we gain meaningful, practical knowledge. Building an Interrupt Controller as a mini FPGA project aligns with key learning goals:
+
+**1. Real-World Relevance:** <br>
+Interrupt controllers are vital in real-world systems and widely used in microcontrollers, which power most devices we use daily.
+
+
+**2. Embedded Systems Focus:** <br>
+As ECE students, understanding embedded systems is crucial. Since interrupt controllers are core to these systems, this project deepens our grasp of their role and design.
+
+
+**3. Microcontroller Architecture Insight:** <br>
+This project connects directly to microprocessor/microcontroller architecture, helping us understand how these systems manage and respond to hardware events.
+
+
+**4. System Responsiveness:** <br>
+By designing an interrupt controller, we explore how systems handle multiple interrupts efficiently, improving our understanding of real-time responsiveness.
+
+# NOVELTY
+The key novelty in our mini project is the inclusion of Interrupt Masking. This feature allows the system to selectively disable lower-priority interrupts while handling critical ones, improving efficiency and responsiveness—especially in real-time applications. Implemented using hardware logic in FPGA, interrupt masking helps customize interrupt handling based on application needs, enhancing both performance and reliability.
+
+# CONCLUSION
+Our goal was to design an interrupt controller that efficiently handles and prioritizes multiple interrupt sources. Through both theory and practical work, we built a functioning controller that meets project objectives. While not as advanced as commercial PICs, it demonstrates a solid understanding of core concepts.
+
+Using the Artix-7 FPGA, Vivado, and Verilog, we validated our design for integration into real-time microcontroller systems. This project not only enhanced our technical knowledge but also improved our teamwork, problem-solving, and project management skills—key traits for any engineer.
+
+# FUTURE WORK
+Future improvements can enhance the usefulness and efficiency of our interrupt controller. Some potential directions include:
+
+**1. Level-Triggered Interrupts:** <br>
+Currently, we use edge-triggered inputs. Shifting to level-triggered interrupts could make the system more stable and versatile.
+
+
+**2. Advanced Modes:** <br>
+Implementing auto-rotation or fully-nested modes would align the controller more closely with real-world applications.
+
+
+**3. Power Optimization:** <br>
+Exploring energy-efficient techniques like adaptive power management or low-power standby modes can make the controller more suitable for mobile and embedded systems.
+
+# REFERENCES
+ 1. www.geeksforgeeks.org <br>
+ 2. www.wikipedia.org <br>
+ 3. www.github.com <br>
+ 4. Care4you.in (engineering theory references) <br>
+ 5. www.youtube.com <br>
+
